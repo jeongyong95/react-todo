@@ -1,17 +1,16 @@
+import "./TodoList.css"
 import TodoItem from "./TodoItem";
 
 const TodoList = () => {
     return (
-        <div>
-            <h2>todoList</h2>
-            <ol>
-                <li>
-                    <TodoItem></TodoItem>
-                </li>
-                <li>
-                    <TodoItem></TodoItem>
-                </li>
-            </ol>
+        <div className={"TodoList"}>
+            <h4>Todo List 🍀</h4>
+            <input className={"SearchBar"} placeholder={"검색어를 입력하세요"}/>
+            <div className={"ListWrapper"}>
+                <TodoItem/>
+                <TodoItem/>
+                <TodoItem/>
+            </div>
         </div>
     )
 }
