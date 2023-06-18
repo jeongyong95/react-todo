@@ -1,10 +1,11 @@
 import "./TodoEditor.css"
-import {useRef, useState} from "react";
+import {useContext, useRef, useState} from "react";
+import {TodoDispatchContext} from "../context/Context";
 
-const TodoEditor = ({createItem}) => {
+const TodoEditor = () => {
+    const {createItem} = useContext(TodoDispatchContext)
     const [title, setTitle] = useState("")
     const inputRef = useRef()
-
     const onKeyDown = (event) => {
         if (event.keyCode === 13) {
             submitItem()

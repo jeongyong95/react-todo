@@ -1,8 +1,10 @@
 import "./TodoList.css"
 import TodoItem from "./TodoItem";
-import {useMemo, useState} from "react";
+import {useContext, useMemo, useState} from "react";
+import {TodoStateContext} from "../context/Context";
 
-const TodoList = ({items, updateItem, deleteItem}) => {
+const TodoList = () => {
+    const items = useContext(TodoStateContext)
     const [keyword, setKeyword] = useState('')
     const changeSearchKeyword = (event) => {
         setKeyword(event.target.value)
@@ -31,7 +33,7 @@ const TodoList = ({items, updateItem, deleteItem}) => {
             <input className={"SearchBar"} value={keyword} onChange={changeSearchKeyword} placeholder={"검색어를 입력하세요"}/>
             <div className={"ListWrapper"}>
                 {items.filter(item => item.title.toLowerCase().includes(keyword.toLowerCase()))
-                    .map(item => <TodoItem key={item.id} {...item} updateItem={updateItem} deleteItem={deleteItem}/>)
+                    .map(item => <TodoItem key={item.id} {...item}/>)
                 }
             </div>
         </div>
