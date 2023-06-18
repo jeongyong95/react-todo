@@ -2,14 +2,15 @@ import './App.css';
 import Header from "./component/Header";
 import TodoEditor from "./component/TodoEditor";
 import TodoList from "./component/TodoList";
-import {useReducer, useRef} from "react";
+import {useCallback, useReducer, useRef} from "react";
 import {reduceItems} from "./Reducer";
 
 function App() {
     const [items, dispatch] = useReducer(reduceItems, [])
 
     const nextId = useRef(3)
-    const createItem = (title) => {
+
+    const createItem = useCallback((title) => {
         dispatch({
             type: 'CREATE',
             item: {
@@ -19,21 +20,21 @@ function App() {
                 createdAt: new Date().getTime()
             }
         })
-    }
+    }, [])
 
-    const updateItem = (targetId) => {
+    const updateItem = useCallback((targetId) => {
         dispatch({
             type: 'UPDATE',
-            targetId : targetId
+            targetId: targetId
         })
-    }
+    }, [])
 
-    const deleteItem = (targetId) => {
+    const deleteItem = useCallback((targetId) => {
         dispatch({
             type: 'DELETE',
             targetId: targetId
         })
-    }
+    }, [])
 
     return (
         <div className="App">
